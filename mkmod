@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+cat >./modules/$1.nix <<CODE
+{ config, utils, pkgs, lib, ... }:
+
+let
+  user = config.user-config;
+  self = user.modules.$1;
+  types = lib.types;
+in {
+  options.user-config.modules.$1 = {
+    enable = lib.mkEnableOption "$1";
+  };
+
+  config = lib.mkIf self.enable {};
+}
+CODE
