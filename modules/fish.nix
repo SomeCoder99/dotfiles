@@ -41,7 +41,7 @@ in {
       };
     };
 
-    user-config.shell = rec {
+    user-config.shell = lib.mkDefault rec {
       name = "fish";
       package = pkgs.${name};
       bin = "${package.outPath}/bin/${name}";

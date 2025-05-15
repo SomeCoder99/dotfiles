@@ -10,20 +10,22 @@ in {
     wayland = lib.mkEnableOption "wayland";
     package = lib.mkOption {
       type = types.package;
-      default = if self.wayland then
-        pkgs.flameshot.overrideAttrs (_: {
-          cmakeFlags = [
-            "-DUSE_WAYLAND_CLIPBOARD=1"
-            "-DUSE_WAYLAND_GRIM=1"
-          ];
-        })
-      else
-        pkgs.flameshot
-      ;
     };
   };
 
   config = lib.mkIf self.enable {
+    user-config.modules.flameshot.package = lib.mkDefault (if self.wayland then
+      pkgs.flameshot.overrideAttrs (_: {
+        cmakeFlags = [
+          "-DUSE_WAYLAND_CLIPBOARD=1"
+          "-DUSE_WAYLAND_GRIM=1"
+        ];
+      })
+    else
+      pkgs.flameshot
+    );
+
+    home.packages = lib.mkIf self.wayland [ pkgs.grim ];
     services.flameshot = {
       package = self.package;
       enable = true;

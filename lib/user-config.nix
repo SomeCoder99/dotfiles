@@ -94,7 +94,7 @@ in {
   };
 
   config = lib.mkIf self.enable {
-    user-config.terminal.defaultCommand = lib.mkDefault self.terminal.command;
+    user-config.terminal.defaultCommand = lib.mkDefault self.shell.command;
     user-config.dir = rec {
       Projects = "Projects";
       Downloads = "Downloads";
@@ -146,7 +146,7 @@ in {
         size = self.gui.cursor.size;
       };
       sessionVariables = {
-        SHELL = self.shell.bin;
+        SHELL = self.shell.command;
         PATH = "$PATH:" + self.shell.path;
       } // self.shell.env;
       file = {

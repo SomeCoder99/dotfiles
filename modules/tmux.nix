@@ -15,8 +15,6 @@ in {
       keyMode = "vi";
       prefix = "C-x";
       extraConfig = ''
-        set -g default-command "${user.data.shell.bin or "bash"}"
-
         bind | split-window -h
         bind _ split-window -v
         bind a new-window -c "#{pane_current_path}"
@@ -31,8 +29,19 @@ in {
         set -g visual-silence off
         setw -g monitor-activity off
         set -g bell-action none
-      '' + (utils.config.getTheme "tmux" user);
+
+      ''
+        + (if user.shell.command != null then
+          ''
+
+          set -g default-command "${user.shell.command}"
+
+          ''
+        else
+          ""
+        )
+        + (utils.config.getTheme "tmux" user);
     };
-    user-config.terminal.defaultCommand = "${pkgs.tmux.outPath}/bin/tmux";
+    user-config.terminal.defaultCommand = lib.mkOverride 900 "${pkgs.tmux.outPath}/bin/tmux";
   };
 }
