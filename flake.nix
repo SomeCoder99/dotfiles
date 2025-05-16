@@ -23,7 +23,7 @@
       locale = "en_US.UTF-8";
     };
   in {
-    nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.${host.name} = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit host users utils; };
       modules = [ ./host/configuration.nix ];
     };
