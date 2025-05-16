@@ -12,6 +12,7 @@
 
   modules = {
     hyprland = {};
+    hyprpaper = {};
     flameshot.wayland = true;
     rofi.wayland = true;
     chromium = {};

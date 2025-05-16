@@ -10,6 +10,7 @@ in {
 
   config = lib.mkIf self.enable {
     programs.chromium = {
+      enable = true;
       extensions = utils.mkListWithCondition {
         dark = user.pref.dark;
       } {

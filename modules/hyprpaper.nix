@@ -9,7 +9,7 @@ in {
   };
 
   config = lib.mkIf self.enable (let
-    wallpaper = "${user.home}/${user.dir.Pictrues}/${user.wallpaper}";
+    wallpaper = "${user.home}/${user.dir.Pictures}/${user.wallpaper}";
   in {
     services.hyprpaper = {
       enable = true;
