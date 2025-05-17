@@ -12,6 +12,7 @@
 
   modules = {
     hyprland = {};
+    astal-widgets = {};
     hyprpaper = {};
     flameshot.wayland = true;
     rofi.wayland = true;

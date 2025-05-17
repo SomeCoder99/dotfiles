@@ -1,4 +1,4 @@
-{ pkgs, host, users, utils, ... }:
+{ pkgs, host, users, libutils, ... }:
 
 let
   mods = builtins.foldl'
@@ -43,7 +43,7 @@ in {
 
   system.stateVersion = "24.11";
 
-  programs = utils.mkAttrWithCondition {
+  programs = libutils.mkAttrWithCondition {
     hyprland = mods ? hyprland;
   } {
     hyprland = {
@@ -53,5 +53,6 @@ in {
 
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
+  services.upower.enable = true;
 }
 

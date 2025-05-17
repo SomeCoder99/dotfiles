@@ -5,9 +5,11 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    astal.url = "github:aylur/astal";
+    astal.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager }: let
+  outputs = { self, nixpkgs, home-manager, astal }: let
     pkgs = nixpkgs.legacyPackages.${host.system};
     utils = import ./lib/utils.nix;
     users = builtins.map
@@ -24,14 +26,14 @@
     };
   in {
     nixosConfigurations.${host.name} = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit host users utils; };
+      specialArgs = { inherit host users; libutils = utils; };
       modules = [ ./host/configuration.nix ];
     };
     homeConfigurations = builtins.foldl'
       (acc: user: acc // {
         ${user.name} = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit utils; };
+          extraSpecialArgs = { inherit utils astal; };
           modules = [
             ./lib/user-config.nix
             { user-config = (builtins.removeAttrs user ["groups"]) // { enable = true; }; }
