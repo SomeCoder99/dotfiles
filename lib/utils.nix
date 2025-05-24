@@ -19,7 +19,7 @@ rec {
       (acc: name: acc ++ (
         let path = "${directory}/${name}"; in
         if dir.${name} == "directory" then
-          [ (import "${path}/${name}.nix") ]
+          [ (import "${path}/default.nix") ]
         else
           [ (import path) ]
       ))
