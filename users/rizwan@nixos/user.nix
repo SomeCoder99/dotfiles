@@ -1,10 +1,9 @@
 { pkgs, ... }:
 
-{
+let self = {
   name = "rizwan";
   groups = [ "wheel" ];
   email = "r1zone.el4nsy4h@gmail.com";
-  script = import ./script.nix;
   pref = {
     theme = "darkslate";
     dark = true;
@@ -52,4 +51,5 @@
     nil
     tree-sitter
   ];
-}
+};
+in self

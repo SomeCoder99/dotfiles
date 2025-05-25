@@ -49,5 +49,23 @@ rec {
     (builtins.attrNames attrs)
   );
 
+  importUsers = directory: args:
+    let dir = builtins.readDir directory; in
+    builtins.foldl'
+      (acc: name: acc ++ (
+        let
+          path = "${directory}/${name}";
+          mapUser = user: user // {
+            modules = (builtins.mapAttrs (n: v: v // { enable = true; }) user.modules);
+          };
+        in if dir.${name} == "directory" then
+          [ (mapUser (import "${path}/user.nix" args) // { userAtMachine = name; }) ]
+        else
+          [ (mapUser (import path args) // { userAtMachine = name; }) ]
+      ))
+      []
+      (builtins.attrNames dir)
+  ;
+
   config = import ./config.nix { inherit importDir; };
 }

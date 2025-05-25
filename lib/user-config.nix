@@ -1,4 +1,4 @@
-{ pkgs, lib, config, utils, ... }:
+{ pkgs, lib, config, utils, inputs, ... }:
 
 let
   types = lib.types;
@@ -18,6 +18,10 @@ in {
     home = lib.mkOption {
       type = types.str;
       default = "/home/${self.name}";
+    };
+    dotfiles = lib.mkOption {
+      type = types.str;
+      default = "${self.home}/dotfiles";
     };
     email = lib.mkOption { type = types.nullOr types.str; default = null; };
     wallpaper = lib.mkOption { type = types.str; default = "wallpaper.png"; };
@@ -65,11 +69,6 @@ in {
       default = {};
     };
 
-    script = lib.mkOption {
-      type = types.attrsOf types.str;
-      default = {};
-    };
-
     terminal = mkProgramOption // {
       defaultCommand = lib.mkOption {
         type = types.nullOr types.str;
@@ -94,6 +93,11 @@ in {
   };
 
   config = lib.mkIf self.enable {
+    lib.user-config.mkMutableSymlink = path:
+      config.lib.file.mkOutOfStoreSymlink
+        (self.dotfiles + lib.removePrefix (toString inputs.self) (toString path))
+    ;
+
     user-config.terminal.defaultCommand = lib.mkDefault self.shell.command;
     user-config.dir = rec {
       Projects = "Projects";
@@ -107,16 +111,6 @@ in {
       username = self.name;
       homeDirectory = self.home;
       stateVersion = "24.11";
-      packages = (builtins.foldl'
-        (acc: name: acc ++ [
-          (pkgs.writeScriptBin
-           name
-            ("#!/usr/bin/env bash\n\n" + self.script.${name})
-          )
-        ])
-        self.packages
-        (builtins.attrNames self.script)
-      );
       activation = {
         userConfigMakeHomeDirectory = lib.hm.dag.entryAfter
           ["writeBoundary"]
@@ -152,7 +146,12 @@ in {
       file = {
         "${self.dir.Pictures}/${self.wallpaper}".source = ../resources + "/${self.wallpaper}";
       } // (builtins.foldl'
-        (acc: name: acc // { ".config/${name}".source = ../config + "/${name}"; })
+        (acc: name: acc // {
+          ".config/${name}" = {
+            recursive = true;
+            source = config.lib.user-config.mkMutableSymlink (../config + "/${name}");
+          };
+        })
         {}
         (builtins.attrNames (builtins.readDir ../config))
       );
