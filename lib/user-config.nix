@@ -111,6 +111,7 @@ in {
       username = self.name;
       homeDirectory = self.home;
       stateVersion = "24.11";
+      packages = self.packages;
       activation = {
         userConfigMakeHomeDirectory = lib.hm.dag.entryAfter
           ["writeBoundary"]
