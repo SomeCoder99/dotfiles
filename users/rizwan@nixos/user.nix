@@ -47,9 +47,12 @@ let self = {
     nerd-fonts.jetbrains-mono
     gcc ccls
     cargo rust-analyzer rustfmt
+    nodejs_24
+    php php84Packages.composer phpactor blade-formatter
     lua lua-language-server stylua
     nil
     tree-sitter
+    laravel
   ];
 };
 in self
