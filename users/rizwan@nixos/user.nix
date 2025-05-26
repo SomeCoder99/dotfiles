@@ -45,6 +45,7 @@ let self = {
 
   packages = with pkgs; [
     nerd-fonts.jetbrains-mono
+
     gcc ccls
     cargo rust-analyzer rustfmt
     nodejs_24

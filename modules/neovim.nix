@@ -12,6 +12,9 @@ in {
     programs.neovim = {
       enable = true;
       defaultEditor = true;
+      extraPackages = with pkgs; [
+        imagemagick
+      ];
     };
 
     user-config.editor = lib.mkDefault rec {
