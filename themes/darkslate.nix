@@ -27,6 +27,22 @@
       contrastUiColor = "#${color.dark4}";
       drawColor = "#${color.red0}";
     };
+
+    rofi = color: ''
+      * {
+        bg0    : #${color.dark0};
+        bg1    : #${color.dark1};
+        bg2    : #${color.dark2};
+        bg3    : #${color.dark3};
+        fg0    : #${color.dark12};
+        fg1    : #${color.dark13};
+        placeholder : #${color.dark8};
+        urgent : #${color.red0};
+        active : #${color.red0};
+        selected : #${color.cyan0};
+        scrollbar : #${color.bg-blue};
+      }
+    '';
   };
   colors.darkslate = rec {
     default = dark;

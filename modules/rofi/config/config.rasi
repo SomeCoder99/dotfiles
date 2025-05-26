@@ -1,0 +1,14 @@
+configuration {
+  font: "mono 10";
+  location: 2;
+  yoffset: 0;
+  xoffset: 0;
+  show-icons: true;
+  disable-history: false;
+  cycle: true;
+  click-to-exit: true;
+  steal-focus: true;
+}
+
+@import "colors"
+@import "theme"

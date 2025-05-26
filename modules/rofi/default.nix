@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, utils, ... }:
 
 let
   user = config.user-config;
@@ -26,5 +26,9 @@ in {
       bin = "${package.outPath}/bin/rofi";
       command = "${bin} -show drun";
     };
+
+    home.file.".config/rofi/colors.rasi".text = utils.config.getTheme "rofi" user;
+    home.file.".config/rofi/config.rasi".source = ./config/config.rasi;
+    home.file.".config/rofi/theme.rasi".source = ./config/theme.rasi;
   };
 }

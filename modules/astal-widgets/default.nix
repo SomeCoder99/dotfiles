@@ -14,7 +14,7 @@ in {
     user-config.modules.astal-widgets.package = lib.mkDefault (astal.lib.mkLuaPackage {
       inherit pkgs;
       name = "astal-widgets";
-      src = ../apps/astal-widgets;
+      src = ./src;
       extraPackages = with astal.packages.${pkgs.system}; [
         hyprland
         tray

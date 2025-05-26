@@ -10,7 +10,7 @@ let
     command = lib.mkOption { type = types.nullOr types.str; default = null; };
   };
 in {
-  imports = (utils.recReadDir ../modules);
+  imports = utils.importDir ../modules;
 
   options.user-config = {
     enable = lib.mkEnableOption "User Configuration";

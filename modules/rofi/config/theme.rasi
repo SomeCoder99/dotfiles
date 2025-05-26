@@ -1,0 +1,135 @@
+* {
+  margin  : 0;
+  padding : 0;
+  spacing : 0;
+}
+
+element-icon, element-text, scrollbar {
+  cursor: pointer;
+}
+
+window {
+  width    : 600px;
+  height   : 600px;
+
+  margin           : 10px;
+  background-color : @bg1;
+  border           : 0;
+  border-radius    : 20px;
+}
+
+mainbox {
+  padding : 10px;
+  spacing : 10px;
+}
+
+inputbar {
+  padding          : 8px;
+  spacing          : 4px;
+  children         : [ textbox-search-icon, entry ];
+  border           : 0;
+  border-radius    : 15px;
+  background-color : @bg0;
+}
+
+entry, element-icon, element-text {
+  vertical-align : 0.5;
+}
+
+textbox-search-icon {
+  expand     : false;
+  content    : " ";
+  text-color : @placeholder;
+  font       : "mono 14";
+  margin     : 0 5px;
+}
+
+entry {
+  placeholder       : "Type here to search";
+  placeholder-color : @placeholder;
+  text-color        : @fg0;
+}
+
+message {
+  border : 0;
+}
+
+textbox {
+  padding          : 10px;
+  border-radius    : 15px;
+  background-color : @bg3;
+  text-color       : @fg1;
+}
+
+scrollbar {
+  handle-color : @scrollbar;
+  handle-rounded-corners : true;
+}
+
+listview {
+  border        : 0;
+  columns       : 1;
+  spacing       : 8px;
+  fixed-height  : true;
+  fixed-columns : true;
+}
+
+element {
+  spacing       : 4px;
+  padding       : 5px 10px;
+  border-radius : 15px;
+}
+
+element normal normal {
+  background-color : @bg2;
+  text-color       : @fg0;
+}
+
+element normal urgent {
+  background-color : @urgent;
+  text-color : @bg0;
+}
+
+element normal active {
+  background-color : @active;
+  text-color : @bg0;
+}
+
+element alternate normal {
+  background-color : @bg2;
+  text-color       : @fg0;
+}
+
+element alternate urgent {
+  background-color : @urgent;
+  text-color : @bg0;
+}
+
+element alternate active {
+  background-color : @active;
+  text-color : @bg0;
+}
+
+element selected normal {
+  background-color : @selected;
+  text-color : @bg0;
+}
+
+element selected urgent {
+  background-color : @selected;
+  text-color : @bg1;
+}
+
+element selected active {
+  background-color : @selected;
+  text-color : @bg2;
+}
+
+element-icon {
+  size: 2em;
+}
+
+element-text {
+  text-color       : inherit;
+  horizontal-align : 0.5;
+}
