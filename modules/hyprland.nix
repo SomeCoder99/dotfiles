@@ -13,6 +13,10 @@ in {
     wayland.windowManager.hyprland = let mod = "SUPER"; in {
       enable = true;
       settings = {
+        exec-once = [
+          "hyprctl setcursor ${user.gui.cursor.name} ${toString user.gui.cursor.size}"
+        ];
+
         general = {
           gaps_in = 10;
           gaps_out = 10;

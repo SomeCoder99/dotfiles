@@ -36,9 +36,9 @@ let self = {
   gui = {
     icon.name = "Colloid-Dark";
     icon.package = pkgs.colloid-icon-theme;
-    cursor.name = "Simp1e";
+    cursor.name = "Simp1e-Dark";
     cursor.package = pkgs.simp1e-cursors;
-    cursor.size = 32;
+    cursor.size = 24;
     theme.name = "Colloid-Dark";
     theme.package = pkgs.colloid-gtk-theme;
   };
