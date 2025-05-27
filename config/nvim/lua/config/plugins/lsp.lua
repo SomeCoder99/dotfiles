@@ -6,6 +6,7 @@ return {
     lazy = false,
     opts = {
       servers = {
+        ts_ls = {},
         lua_ls = {},
         rust_analyzer = {},
         ccls = {},

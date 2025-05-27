@@ -48,7 +48,7 @@ let self = {
 
     gcc ccls
     cargo rust-analyzer rustfmt
-    nodejs_24
+    nodejs_24 pnpm typescript typescript-language-server
     php php84Packages.composer phpactor blade-formatter
     lua lua-language-server stylua
     nil
